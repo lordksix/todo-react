@@ -5,7 +5,7 @@ const TodosList = (props) => {
   return (
     <ul>
       {todosProps.map((todo) => (
-        <TodoItem itemProp={todo} />
+        <TodoItem key={todo.id} itemProp={todo} />
       ))}
     </ul>
   );
