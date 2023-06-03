@@ -8,13 +8,15 @@ const Navbar = () => {
         <li>Home</li>
         <li>About</li>
         <li>
-          <button>
+          <button onClick={() => setDropdown((prev) => !prev)}>
             Services <span>&#8595;</span>
           </button>
-          <ul>
-            <li>Design</li>
-            <li>Development</li>
-          </ul>
+          {dropdown && (
+            <ul>
+              <li>Design</li>
+              <li>Development</li>
+            </ul>
+          )}
         </li>
       </ul>
     </nav>
