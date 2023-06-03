@@ -1,8 +1,11 @@
+import TodoItem from '@/components/TodoItem';
+
 const TodosList = (props) => {
+  const { todosProps } = props;
   return (
     <ul>
-      {props.todosProps.map((todo) => (
-        <li>{todo.title}</li>
+      {todosProps.map((todo) => (
+        <TodoItem itemProp={todo} />
       ))}
     </ul>
   );
