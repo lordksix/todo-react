@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
+import '@/styles/app.css';
+
 import TodoApp from '@/components/TodoApp';
 import Navbar from './components/Navbar ';
 import Modal from './components/Modal';
