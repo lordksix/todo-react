@@ -1,4 +1,4 @@
-import styles from '@/styles/TodoItem.module.css';
+import styles from '@/styles/TodoItem.module.scss';
 
 const TodoItem = ({ itemProp, handleChange, delTodo }) => {
   return (

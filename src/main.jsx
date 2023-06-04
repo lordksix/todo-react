@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import '@/styles/app.css';
+import '@/styles/app.scss';
 
 import TodoApp from '@/components/TodoApp';
 import Navbar from './components/Navbar ';
