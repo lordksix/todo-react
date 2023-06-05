@@ -2,7 +2,6 @@
   "name": "todo-react",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://lordksix.github.io/todo-react/",
   "type": "module",
   "scripts": {
     "dev": "vite",

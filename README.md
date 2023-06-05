@@ -63,7 +63,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-You can find a live demo in [HERE](https://lordksix.github.io/todo-react/).
+You can find a live demo in [HERE](https://todo-react-cyan-tau.vercel.app/).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
