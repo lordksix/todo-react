@@ -1,5 +1,7 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 import { v4 as uuidv4 } from 'uuid';
+
 const todosStore = (set) => ({
   todos: [],
   addTodoItem: (title) => {
@@ -43,4 +45,8 @@ const todosStore = (set) => ({
     }));
   },
 });
-export const useTodosStore = create(todosStore);
+export const useTodosStore = create(
+  persist(todosStore, {
+    name: 'todos',
+  })
+);
