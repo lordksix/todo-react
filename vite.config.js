@@ -13,5 +13,6 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  base: "/todo-react",
   plugins: [react()],
 })
