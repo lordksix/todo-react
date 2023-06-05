@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import '@/styles/app.scss';
 
@@ -10,8 +10,8 @@ const domContainer = document.getElementById("root");
 const root = ReactDOM.createRoot(domContainer);
 root.render(
   <React.StrictMode>
-    <HashRouter>
+    <BrowserRouter>
       <TodoApp />
-    </HashRouter>
+    </BrowserRouter>
   </React.StrictMode>
 );
