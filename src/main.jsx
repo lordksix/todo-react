@@ -10,7 +10,7 @@ const domContainer = document.getElementById("root");
 const root = ReactDOM.createRoot(domContainer);
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/todo-react/">
       <TodoApp />
     </BrowserRouter>
   </React.StrictMode>
