@@ -2,6 +2,8 @@ import React, { useState, useRef } from "react";
 import { useOnClickOutside } from "@/useOnClickOutside";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthContext } from '@/context/AuthContext';
+import { MdClose } from 'react-icons/md';
+import { FiMenu } from 'react-icons/fi';
 
 const links = [
   { path: '/', text: 'Home' },
@@ -11,11 +13,11 @@ const links = [
 ];
 
 const Navbar = () => {
-  const [dropdown, setDropdown] = useState(false);
   const ref = useRef();
   const navigate = useNavigate();
+  const [navbarOpen, setNavbarOpen] = useState(false);
   
-  useOnClickOutside(ref, dropdown, () => setDropdown(false));
+  useOnClickOutside(ref, navbarOpen, () => setNavbarOpen(false));
   const { user, logout } = useAuthContext();
   const handleLogout = () => {
     logout();
@@ -23,68 +25,78 @@ const Navbar = () => {
   }
   return (
     <>
-      <nav className="navbar">
-      <ul>
-        {links.map((link) => {
-          return (
-            <React.Fragment key={link.text}>
-            {link.path === 'login' ? (
-              !user && (
-                <li>
-                  <NavLink
-                    to={link.path}
-                    className={({ isActive }) => isActive ? 'active' : undefined }
-                  >
-                      {link.text}
-                  </NavLink>
-                </li>
-              )
-            ) : link.path === 'profile' ? (
-              user && (
-                <li>
-                  <NavLink to={link.path}>
-                    {link.text}
-                  </NavLink>
-                </li>
-              )
-            ) : (
-              <li>
-                  <NavLink
-                    to={link.path}
-                    className={({ isActive }) => isActive ? 'active' : undefined }
-                  >
-                      {link.text}
-                  </NavLink>
-              </li>
-            )}
-          </React.Fragment>
-          );
-        })}
-        <li ref={ref}>
-          <button onClick={() => setDropdown((prev) => !prev)}>
-            Services <span>&#8595;</span>
-          </button>
-          {dropdown && (
-            <ul>
-              <li>Design</li>
-              <li>Development</li>
-            </ul>
+      <nav ref={ref} className="navbar">
+        <button
+          className="toggle"
+          onClick={() => setNavbarOpen((prev) => !prev)}
+        >
+          {navbarOpen ? (
+            <MdClose style={{ width: '32px', height: '32px' }} />
+          ) : (
+            <FiMenu
+              style={{
+                width: '32px',
+                height: '32px',
+              }}
+            />
           )}
-        </li>
-        {!user && (
-          <li className="log-in">
-            <span>Log in to edit to-dos</span>
-          </li>
-        )}
-      </ul>
-    </nav>
-    {user && (
-      <div className="logout">
-        <p>{user}</p>
-        {<button onClick={handleLogout}>Logout</button>}
-      </div>
-    )}
-  </>
+        </button>
+        <ul className={`menu-nav${navbarOpen ? ' show-menu' : ''}`}>
+          {links.map((link) => {
+            return (
+              <React.Fragment key={link.text}>
+              {link.path === 'login' ? (
+                !user && (
+                  <li>
+                    <NavLink
+                      to={link.path}
+                      className={({ isActive }) => isActive ? 'active' : undefined }
+                      onClick={() => setNavbarOpen(false)}
+                    >
+                        {link.text}
+                    </NavLink>
+                  </li>
+                )
+              ) : link.path === 'profile' ? (
+                user && (
+                  <li>
+                    <NavLink
+                      to={link.path}
+                      className={({ isActive }) => isActive ? 'active' : undefined }
+                      onClick={() => setNavbarOpen(false)}
+                    >
+                        {link.text}
+                    </NavLink>
+                  </li>
+                )
+              ) : (
+                <li>
+                    <NavLink
+                      to={link.path}
+                      className={({ isActive }) => isActive ? 'active' : undefined }
+                      onClick={() => setNavbarOpen(false)}
+                    >
+                        {link.text}
+                    </NavLink>
+                </li>
+              )}
+            </React.Fragment>
+            );
+          })}
+          {!user && (
+            <li className="log-in">
+              <span>Log in to edit to-dos</span>
+            </li>
+          )}
+        </ul>
+      </nav>
+      {user && (
+        <div className="logout">
+          <p>{user}</p>
+          {<button onClick={handleLogout}>Logout</button>}
+        </div>
+      )}
+    </>
   );
 };
 export default Navbar;
