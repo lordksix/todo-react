@@ -1,10 +1,15 @@
 import { useState, useRef } from 'react';
+import { useTodosStore } from '@/store';
 import styles from '@/styles/TodoItem.module.scss';
+import { FaTrash } from "react-icons/fa";
+import { AiFillEdit } from "react-icons/ai";
 
-const TodoItem = ({ itemProp, handleChange, delTodo, setUpdate }) => {
+const TodoItem = ({ itemProp }) => {
+  const handleChange = useTodosStore((state) => state.handleChange);
+  const delTodo = useTodosStore((state) => state.delTodo);
+  const setUpdate = useTodosStore((state) => state.setUpdate);
   const [editing, setEditing] = useState(false);
   const editInputRef = useRef(null);
-  /* const [updateInput, setUpdateInput] = useState(itemProp.title); */
 
   const completedStyle = {
     fontStyle: 'italic',
@@ -19,7 +24,6 @@ const TodoItem = ({ itemProp, handleChange, delTodo, setUpdate }) => {
 
   const handleUpdatedDone = (event) => {
     if (event.key === 'Enter') {
-      /* setUpdate(updateInput, itemProp.id); */
       setUpdate(editInputRef.current.value, itemProp.id);
       setEditing(false);
     }
@@ -40,21 +44,22 @@ const TodoItem = ({ itemProp, handleChange, delTodo, setUpdate }) => {
           checked={itemProp.completed}
           onChange={() => handleChange(itemProp.id)}
         />
-        <button onClick={handleEditing}>Edit</button>
-        <button onClick={() => delTodo(itemProp.id)}>Delete</button>
+        <button onClick={handleEditing}>
+          <AiFillEdit style={{ color: "#5e5e5e", fontSize: "16px" }}/>
+        </button>
+        <button onClick={() => delTodo(itemProp.id)}>
+          <FaTrash style={{ color: "#5e5e5e", fontSize: "16px" }}/>
+        </button>
         <span style={itemProp.completed ? completedStyle : null}>
-          {/* {updateInput} */}
           {itemProp.title}
         </span>
       </div>
       <input
         type="text"
-        /* value={updateInput} */
         ref={editInputRef}
         defaultValue={itemProp.title}
         className={styles.textInput}
         style={editMode}
-        /* onChange={(e) => setUpdateInput(e.target.value)} */
         onKeyDown={handleUpdatedDone}
       />
     </li>
